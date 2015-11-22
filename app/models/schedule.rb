@@ -1,4 +1,5 @@
 class Schedule < ActiveRecord::Base
+  belongs_to :email
   validates :email_id, presence: true
-  validates :send_at, format: {with: /\d{2,4}-\d{1,2}-\d{1,2}/, message: "must be yy-mm-dd", allow_nil: false}
+  validates :send_at, presence: {message: "must be a valid date"}
 end

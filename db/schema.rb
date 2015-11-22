@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150531163354) do
+ActiveRecord::Schema.define(version: 20151020044700) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,9 @@ ActiveRecord::Schema.define(version: 20150531163354) do
     t.text     "subject"
     t.text     "body"
     t.string   "to"
+    t.integer  "times"
+    t.integer  "every_n_minutes"
+    t.time     "send_first_at"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
@@ -41,6 +44,7 @@ ActiveRecord::Schema.define(version: 20150531163354) do
     t.time     "token_expires_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "refresh_token"
   end
 
   add_index "users", ["uid"], name: "index_users_on_uid", using: :btree

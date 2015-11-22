@@ -7,7 +7,7 @@ class ApplicationController < ActionController::API
   end
 
   def determine_redirect_to
-    session[:redirect_to] = params[:redirect_to]
+    session[:redirect_to] = params[:redirect_to] if params[:redirect_to]
   end
 
   def current_user

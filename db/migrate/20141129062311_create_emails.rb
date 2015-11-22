@@ -4,6 +4,9 @@ class CreateEmails < ActiveRecord::Migration
       t.text :subject
       t.text :body
       t.string :to
+      t.integer :times
+      t.integer :every_n_minutes
+      t.time :send_first_at
 
       t.timestamps
     end

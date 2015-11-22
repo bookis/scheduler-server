@@ -1,0 +1,3 @@
+valid:
+  send_at: <%= Time.now %>
+  email: valid

@@ -4,7 +4,8 @@ class EmailsController < ApplicationController
   end
 
   def create
-    @email = current_user.emails.new(params.require(:email).permit(:subject, :to, :body))
+    email_params = params.require(:email).permit(:subject, :to, :body, :every_n_minutes, :times, :send_first_at)
+    @email = current_user.emails.new(email_params)
     if @email.save
       render json: @email.as_json
     else
