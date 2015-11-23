@@ -1,7 +1,8 @@
 valid:
+  id: 1
   subject: Email Title
   body: Lorem Ipsum
   to: b@example.com
-  send_n_minutes: <%= 60 * 24 %>
+  times: 10
+  every_n_minutes: <%= 60 * 24 %>
   send_first_at: <%=  Time.now %>
-  user: valid

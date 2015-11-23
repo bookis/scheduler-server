@@ -4,12 +4,10 @@ class SchedulesController < ApplicationController
   end
 
   def create
-    @schedule = Schedule.new(params.require(:schedule).permit(:send_at, :email_id))
-    if @schedule.save
-      render json: @schedule.as_json
-    else
-      render json: @schedule.errors.to_json, status: 403
-    end
+    @email = Email.find(params[:email_id])
+    @scheduler = Scheduler.new(@email)
+    @email.schedules.create!(@scheduler.schedules)
+    render nothing: true, status: 201
   end
 
   def destroy
