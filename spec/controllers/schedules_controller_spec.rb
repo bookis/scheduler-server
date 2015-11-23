@@ -23,5 +23,20 @@ describe SchedulesController do
       expect(Email).to receive(:find).and_return email
       expect { request! }.to change { email.schedules.count }.by(10)
     end
+
+    context "when it fails" do
+      before do
+        allow_any_instance_of(Scheduler).to receive(:schedules) { [{}] }
+      end
+
+      it "creates 0 schedules" do
+        expect { request! }.to change { Schedule.count }.by(0)
+      end
+
+      it "returns a 400" do
+        request!
+        expect(response.status).to eq 400
+      end
+    end
   end
 end

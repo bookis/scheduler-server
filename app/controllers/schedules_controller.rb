@@ -6,8 +6,12 @@ class SchedulesController < ApplicationController
   def create
     @email = Email.find(params[:email_id])
     @scheduler = Scheduler.new(@email)
-    @email.schedules.create!(@scheduler.schedules)
-    render nothing: true, status: 201
+    begin
+      @email.schedules.create!(@scheduler.schedules)
+      render nothing: true, status: 201
+    rescue ActiveRecord::RecordInvalid => e
+      render json: {error: e.message}, status: 400
+    end
   end
 
   def destroy
