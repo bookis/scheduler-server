@@ -1,6 +1,7 @@
 class SchedulesController < ApplicationController
   def index
-    render json: Schedule.all.as_json
+    @email = Email.find(params[:email_id])
+    render json: @email.schedules.as_json
   end
 
   def create

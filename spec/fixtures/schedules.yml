@@ -1,3 +1,6 @@
 valid:
   send_at: <%= Time.now %>
   email: valid
+other_users:
+  send_at: <%= Time.now %>
+  email: other_users

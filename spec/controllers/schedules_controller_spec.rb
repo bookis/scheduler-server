@@ -2,6 +2,16 @@ require "rails_helper"
 
 describe SchedulesController do
   fixtures :emails
+
+  describe "GET index" do
+    let(:request!) { get :index, email_id: 1 }
+    it "returns json of all email schedules" do
+      post :create, email_id: 1
+      request!
+      json = JSON.parse(response.body)
+      expect(json.size).to eq 10
+    end
+  end
   describe "POST create_all" do
     let(:request!) { post :create, email_id: 1 }
     it "returns a 201" do

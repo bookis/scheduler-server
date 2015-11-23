@@ -6,3 +6,11 @@ valid:
   times: 10
   every_n_minutes: <%= 60 * 24 %>
   send_first_at: <%=  Time.now %>
+other_users:
+  id: 2
+  subject: Other Title
+  body: Lorem Ipsum
+  to: z@example.com
+  times: 1
+  every_n_minutes: <%= 60 * 24 %>
+  send_first_at: <%=  Time.now %>
