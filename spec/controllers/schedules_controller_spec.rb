@@ -34,6 +34,23 @@ describe SchedulesController do
       expect { request! }.to change { email.schedules.count }.by(10)
     end
 
+    context "when it has duplicates" do
+      it "doesn't re create" do
+        email = Email.find(1)
+        expect(Email).to receive(:find).twice.and_return email
+        request!
+        expect { post :create, email_id: 1 }.to_not change { email.schedules.count }
+      end
+
+      it "creates new schedules if the times has been updated" do
+        email = Email.find(1)
+        expect(Email).to receive(:find).twice.and_return email
+        request!
+        email.increment!(:times)
+        expect { post :create, email_id: 1 }.to change { email.schedules.count }.by(1)
+      end
+    end
+
     context "when it fails" do
       before do
         allow_any_instance_of(Scheduler).to receive(:schedules) { [{}] }

@@ -6,7 +6,8 @@ class SchedulesController < ApplicationController
 
   def create
     @email = Email.find(params[:email_id])
-    @scheduler = Scheduler.new(@email)
+    @time = @email.schedules.maximum(:send_at)
+    @scheduler = Scheduler.new(@email, after: @time)
     begin
       @email.schedules.create!(@scheduler.schedules)
       render nothing: true, status: 201

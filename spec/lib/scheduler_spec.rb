@@ -20,5 +20,13 @@ describe Scheduler do
     it "returns a hash with :send_at" do
       expect(schedules.first[:send_at]).to be_within(2).of Time.now
     end
+
+    context "when given an after time" do
+      let(:scheduler) { Scheduler.new(email, after: Time.now + 1) }
+
+      it "does not include schedules before the after time" do
+        expect(scheduler.schedules.count).to eq 9
+      end
+    end
   end
 end
